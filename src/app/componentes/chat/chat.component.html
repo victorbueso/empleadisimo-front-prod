@@ -1,0 +1,69 @@
+<div class="chat-container">
+    <div class="container-padding">
+        <div class="title-container">
+            <div class="pp-main">
+                <button class="button-home" (click)="goHome()">
+                    <i class="fas fa-home"></i>
+                </button>
+            </div>
+            <div class="mm-container">
+                <h1>Mis mensajes</h1>
+            </div>
+        </div>
+        <div class="contact-container">
+            <div *ngFor="let user of users; let i = index" class="contact pointer">
+                <button (click)="changeMessage(user, i)" class="buttonUser">
+                    <div class="contact-profile">
+                        <img class="contact-pp" [src]="user['fotoPerfil'] | modifyImage">
+                    </div>
+                    <div class="information-contact">
+                        <div class="prev-information">
+                            <span>{{ user['nombreCompleto'] | titlecase }}</span>
+                        </div>
+                        <div *ngIf="notifications[i] > 0" class="circle">
+                            <span>{{ notifications[i] }}</span>
+                        </div>
+                    </div>
+                </button><br>
+                <hr>
+            </div>        
+        </div>
+    </div>
+    <div class="noContact" [ngClass]="{'d-block' : actualName == '', 'd-none' : actualName != ''}">
+        <div class="selectMessage">
+            <div class="selectMessageInfo">
+                <div class="background-box">
+                    <div class="mailbox-image">
+                        <i class="fas fa-inbox mailbox"></i>
+                    </div>
+                </div>
+                <div class="text-noselect">
+                    <span>Seleccione un chat dentro de la caja de mensajes</span>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="message-container" [ngClass]="{'d-block' : actualName != '', 'd-none' : actualName == ''}">
+        <div class="ppc pointer">
+            <img class="contact-pp" [src]=" actualPhoto | modifyImage">
+            <p>{{ actualName | titlecase }}</p>
+        </div>
+        <div class="messages">
+            <div class="messages-container">
+                <div *ngFor="let message of actualMessages.slice().reverse()" class="mess" [class.sendit] = "myId == message['idUser']" [class.reciveit] = "myId != message['idUser']">
+                    <div class="ms">
+                        <p>{{ message['content'] }}</p>
+                    </div>
+                    <div class="hour-content">
+                        <span>{{ message['hour'] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="send-message pointer">
+                <input autocomplete="off" (keyup.enter)="sendMessage(inputMessage.value)" name="input-message" #inputMessage type="text" placeholder="Escriba un mensaje" class="input-message">
+                <button (click) = "sendMessage(inputMessage.value)" class="send-button" >S</button>
+            </div>
+        </div>
+    </div>
+</div>

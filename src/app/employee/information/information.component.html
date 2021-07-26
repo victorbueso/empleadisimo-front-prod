@@ -1,0 +1,85 @@
+<div class="profile-company">
+    <div *ngIf = "usuario" class="profile-information">
+        <div class="collapse-menu">
+            <div (click)="visualizar('publicaciones')" class="option-menu">
+                <i class="far fa-eye"></i>
+            </div>
+            <div (click)="visualizar('perfil')" class="option-menu">
+                <i class="fas fa-info"></i>
+            </div>
+        </div>
+        <div class="pp-container">
+            <img class="img-profile pointer" [src]=" usuario.fotoPerfil | modifyImageP ">
+            <div class="name-container">
+                <h1>{{ usuario.nombreCompleto | titlecase }}</h1>
+                <hr>
+            </div>
+            <div class="option-container">
+                <button (click)="seguir()" class="follow-button">{{siguiendo | titlecase}}</button>
+                <h3 (click)="visualizar('publicaciones')" class="pointer">Publicaciones</h3>
+                <h3 (click)="visualizar('perfil')" class="pointer">Informacion basica</h3>
+            </div>
+        </div>
+    </div>    
+    <div *ngIf='usuario' class="container-publications">
+        <div [ngClass]="{'visible':visualizador=='publicaciones','no-visible':visualizador!='publicaciones'}" class="posts">
+            <div class="title-publication">
+                <h2>Publicaciones</h2>
+            </div>
+            <div class="list-posts">
+                <div *ngFor="let publicacion of publicaciones; index as i" class="post">
+                    <div class="information-company">
+                        <img [src]=" usuario.fotoPerfil | modifyImageP ">
+                        <div class="main-infoC">
+                            <span>{{ usuario.nombreCompleto }}</span><br>
+                            <span>{{ publicacion.fechaPublicacion | date:'longDate' }}</span>                        
+                        </div>
+                    </div>
+                    <div class="information-job">
+                        <p><span class="title-info">Se busca:</span>{{ publicacion.titulo }}</p><br>
+                        <p><span class="title-info">Sueldo:</span>{{ publicacion.cantidadPago }}</p><br>
+                        <p><span class="title-info">Fecha de vencimiento:</span> {{ publicacion.fechaVencimiento | date:'longDate' }}</p><br>
+                    </div>
+                    <div class="contain-apply">
+                        <button type="button" [disabled]="publicacion['aplico']" (click)="open(selectCV, publicacion._id, i)">Aplicar</button>
+                    </div> 
+                </div>
+            </div>
+            
+        </div>
+        <div [ngClass]="{'visible':visualizador=='perfil','no-visible':visualizador!='perfil'}" class="posts">
+            <div class="list-posts">
+                <div class="post">
+                    <div class="general-information">
+                        <p><span>Informacion empresa: </span> {{ usuario.nombreCompleto | titlecase }}</p>
+                        <p><span>Fecha fundación: </span>{{usuario.fechaFundacion  | date:'longDate'}}</p>
+                        <p><span>Correo: </span> {{usuario.correo}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>    
+</div>
+
+<!-- Seleccionar cv -->
+<ng-template #selectCV let-modal>
+    <div class="modal-body" *ngIf="!verifiedAccount">
+      Actualmente tu cuenta no se encuentra verificada, por lo tanto no puede aplicar a esta publicación de trabajo. <br>
+      Te hemos enviado un correo electrónico para que puedas verificar tu cuenta y así podrás aplicar a todos los trabajos que quieras.
+    </div>
+    <div class="modal-body text-center" *ngIf="verifiedAccount && curriculums.length==0">
+      Agrega un curriculum para poder aplicar a un trabajo.
+    </div>
+    <div class="modal-body" *ngIf="verifiedAccount && curriculums.length != 0">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1" style="font-family:'Raleway semibold'">Seleccionado un CV</label>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="cvSelected">
+          <option selected disabled value="-1">-- Seleccionar --</option>
+          <option *ngFor="let cv of curriculums; index as i" [value]="i"> Curriculum {{i}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="aplicar()" [disabled]="!(cvSelected!=-1)">Enviar</button>
+    </div>
+  </ng-template>

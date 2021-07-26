@@ -1,0 +1,167 @@
+.slider-conteiner {
+    height: 80vh;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 22.5em;
+    overflow: hidden;
+}
+
+.slider {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.item-slider {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: left 1s;
+}
+
+.slider-text {
+    position: absolute;
+    top: 75%;
+    font-family: Ramabhadra;
+    background-color: black;
+    width: 100%;
+    height: 25%;
+    color: white;
+    text-align: center;
+}
+
+.slider-button {
+    position: absolute;
+    width: auto;
+    background-color: transparent;
+    border-width: 0px;
+}
+
+.icono-flecha {
+    color: white;
+    font-size: 2em;
+}
+
+.main-title {
+    background-color: #054a9175;
+}
+
+.secondary-title {
+    background-color: #f1730094;
+}
+
+.image-slider {
+    height: 100%;
+    overflow: hidden;
+}
+
+.image-slider img {
+    width: 100%;
+}
+
+.slider-i {
+    right: 0%;
+}
+
+.slider-l {
+    left: -1%;
+}
+
+.fa-arrow-circle-left:hover {
+    font-size: 3em;
+}
+
+.fa-arrow-circle-right:hover {
+    font-size: 3em;
+}
+
+.container-empleador {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 1%;
+    flex-direction: column;
+}
+
+.image-login {
+    height: 100px;
+}
+
+.titles-container {
+    color: var(--main-color);
+}
+
+@media screen and (max-width: 790px) {
+    .image-slider {
+        display: none;
+    }
+    .slider-text {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        display: flex;
+        height: 100%;
+        top: 0px;
+        padding: 5%;
+    }
+    .main-title {
+        background-color: var(--main-color);
+    }
+    .secondary-title {
+        background-color: var(--secondary-color);
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .first-block {
+        border-top: 1px solid white;
+        padding: 1em 0em;
+        background-color: var(--main-color);
+        margin: 0px !important;
+    }
+    .f2-rigth {
+        display: none;
+    }
+    .f1-left {
+        width: 100vw;
+        background-color: var(--main-color);
+    }
+    .information h1 {
+        font-size: 1.5;
+        color: white;
+    }
+    .information h2 {
+        font-size: 1;
+        color: white !important;
+    }
+    .btn-outline-secondary {
+        border: 1px solid white;
+    }
+    .ff-div {
+        display: none;
+    }
+    .df-list {
+        display: none;
+    }
+    .ffr {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .information h1 {
+        font-size: 1em;
+    }
+    .information h2 {
+        font-size: .7em;
+    }
+    .btn-outline-secondary {
+        font-size: .7em;
+    }
+    .btn-outline-danger {
+        font-size: .7em;
+    }
+}

@@ -1,0 +1,142 @@
+h2{
+    font-family: 'Ramabhadra';
+    color: #054a91;
+    font-size: 24px !important;
+}
+
+h5{
+    font-family: 'Raleway bold';
+    color:#054a91;
+    font-size: 20px !important;
+}
+
+.benefits{
+    font-family: 'Raleway bold';
+}
+
+.pros{
+    font-family: 'Raleway semibold';
+}
+
+.pros-icon{
+    background-color: #f17300;
+    border-radius: 50%; 
+    width: 200px; 
+    height: 200px
+}
+
+body {
+    --main-color: #054a91;
+    --secondary-color: #f17300;
+}
+
+.first-block {
+    display: flex;
+    flex-direction: row;
+    max-width: 100vw;
+    height: auto;
+}
+
+.f1-left {
+    width: 50vw;
+    display: inherit;
+    align-items: center;
+}
+
+.information {
+    color: var(--main-color);
+    box-sizing: border-box;
+    padding: 0% 5%;
+    text-align: center;
+    width: 100%;
+}
+
+.information h1 {
+    font-size: 2.5em;
+}
+
+.information h2 {
+    font-size: 1.5em;
+}
+
+.f2-rigth {
+    overflow: hidden;
+    height: 90vh;
+    width: 50vw;
+}
+
+.img-block {
+    max-height: 100%;
+}
+
+@media screen and (max-width: 790px) {
+    .image-slider {
+        display: none;
+    }
+    .slider-text {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        display: flex;
+        height: 100%;
+        top: 0px;
+        padding: 5%;
+    }
+    .main-title {
+        background-color: var(--main-color);
+    }
+    .secondary-title {
+        background-color: var(--secondary-color);
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .first-block {
+        border-top: 1px solid white;
+        padding: 1em 0em;
+        background-color: var(--main-color);
+        margin: 0px !important;
+    }
+    .f2-rigth {
+        display: none;
+    }
+    .f1-left {
+        width: 100vw;
+        background-color: var(--main-color);
+    }
+    .information h1 {
+        font-size: 1.5;
+        color: white;
+    }
+    .information h2 {
+        font-size: 1;
+        color: white !important;
+    }
+    .btn-outline-secondary {
+        border: 1px solid white;
+    }
+    .ff-div {
+        display: none;
+    }
+    .df-list {
+        display: none;
+    }
+    .ffr {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .information h1 {
+        font-size: 1em;
+    }
+    .information h2 {
+        font-size: .7em;
+    }
+    .btn-outline-secondary {
+        font-size: .7em;
+    }
+    .btn-outline-danger {
+        font-size: .7em;
+    }
+}

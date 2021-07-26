@@ -1,0 +1,35 @@
+h1, h3{
+  font-family: 'Raleway bold';
+  margin-top:auto;
+  margin-bottom: 0px;
+}
+
+.modal-title {
+  color: #054a91;
+}
+
+
+.error{
+  padding: 5px;
+  margin:5px;
+  margin-top: 0px;
+  font-size: 1rem;
+  border-radius: 5px;
+  color: red;
+}
+
+.input-error{
+    border: 2px solid red;
+}
+
+.error-message {
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-name: fade-in;
+  animation-duration: 1s;
+  display: none;
+  color: red;
+  opacity: 0%;
+  padding: 0;
+  margin: 0;
+}
