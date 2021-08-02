@@ -43,6 +43,26 @@ export class CvComponent{
     }
   }
 
+  uploadPhoto(){
+    const file_data = this.file;
+    //Mandarlo a traves de peticiones Rest.
+    console.log(file_data);
+    const data = new FormData();
+    data.append('file', file_data);
+    data.append('upload_preset', 'empleadisimo_cv');
+    data.append('cloud_name', 'jdfiallos');
+
+    this.userService.uploadCV( data ).subscribe( response=>{
+      if ( response ) {
+        console.log(response);
+      }
+    }, error => {
+      console.log(error);
+    }
+    )
+
+  }
+
   updateCurriculum(){
     this.userService.obtainMyCurriculums(this.idEmpleado).subscribe((res) => {
       this.curriculums = res;
@@ -50,18 +70,6 @@ export class CvComponent{
     }, err => console.error(err))
   }
 
-  
-  uploadPhoto(){
-    this.uploading = !this.uploading
-    this.userService.sendPhoto(this.file, this.idEmpleado).subscribe(res => {
-      this.uploading = !this.uploading;
-      this.updateCurriculum();
-      this.successFile = true;
-    },
-    err => {
-      console.error(err)
-    })
-  }
   
   addCv(){
     this.showCv = false;

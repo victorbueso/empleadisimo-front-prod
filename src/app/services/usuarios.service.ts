@@ -77,6 +77,15 @@ export class UsuariosService {
   }
 
 
+  uploadCV( vals: any ): Observable<any>{
+    let data = vals;
+
+    return this.httpClient.post(
+      'https://api.cloudinary.com/v1_1/jdfiallos/image/upload',
+      data
+    )
+  }
+
 
   sendPhoto(cv: File, idUser: string){
     
