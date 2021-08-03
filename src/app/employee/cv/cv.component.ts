@@ -43,6 +43,8 @@ export class CvComponent{
     }
   }
 
+
+  body: any = {};
   uploadPhoto(){
     const file_data = this.file;
     //Mandarlo a traves de peticiones Rest.
@@ -52,15 +54,24 @@ export class CvComponent{
     data.append('upload_preset', 'empleadisimo_cv');
     data.append('cloud_name', 'jdfiallos');
 
+
     this.userService.uploadCV( data ).subscribe( response=>{
-      if ( response ) {
-        console.log(response);
+      if ( response ){
+        this.body = { urlCV: response.secure_url};
+        console.log(this.body);
+        this.userService.uploadCVBD(this.idEmpleado , this.body ).subscribe( res => {
+          if (res){
+            console.log(res);
+            console.log('Se subio con exito el cv')
+          }
+        },
+         error => { console.log(error)});
       }
-    }, error => {
+    }, 
+    error => {
       console.log(error);
     }
     )
-
   }
 
   updateCurriculum(){

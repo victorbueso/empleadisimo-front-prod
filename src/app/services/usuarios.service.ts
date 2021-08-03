@@ -45,9 +45,11 @@ export class UsuariosService {
     return this.httpClient.post(`${this.url}/updateCompany/${idUser}`,data);
   }
 
-  uploadProfileImage(idUser:string,data:any):Observable<any>{
-    return this.httpClient.put(`${this.url}/profilePic/${idUser}`,data);
+  //Se envia el path de la iamgen
+  uploadProfileImage(idUser:string,body:any):Observable<any>{
+    return this.httpClient.put(`http://localhost:3000/usuarios/profilePic/${idUser}`,body);
   }
+
   updateProfileImage(idUser:string,data:any):Observable<any>{
     return this.httpClient.put(`${this.url}/updatePic/${idUser}`,data);
   }
@@ -81,9 +83,13 @@ export class UsuariosService {
     let data = vals;
 
     return this.httpClient.post(
-      'https://api.cloudinary.com/v1_1/jdfiallos/image/upload',
+      'https://api.cloudinary.com/v1_1/jdfiallos/auto/upload',
       data
     )
+  }
+
+  uploadCVBD( idUsuario: String, body: String ): Observable<any> {
+    return this.httpClient.post(`http://localhost:3000/usuarios/${idUsuario}/cv`, body);
   }
 
 

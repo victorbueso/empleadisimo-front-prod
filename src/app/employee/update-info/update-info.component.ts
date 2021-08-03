@@ -95,18 +95,33 @@ export class UpdateInfoComponent implements OnInit{
     reader.readAsDataURL(file)
   }
 
-
+  body: any = {};
   upload(){
     if(this.uploadForm.value.avatar != ''){
       let formData = new FormData();
-      formData.append('image',this.uploadForm.value.avatar);
-      this.userServices.uploadProfileImage(this.usuario._id,formData)
-      .subscribe(res=>{
-      },error=>{
-        console.log(error);
-      });
-    }
+      formData.append('file',this.uploadForm.value.avatar);
+      formData.append('upload_preset', 'empleadisimo_avatar');
+      formData.append('cloud_name', 'jdfiallos');
 
+
+      this.userServices.uploadCV( formData ).subscribe( response =>{
+        if ( response ){
+          this.body = { path: response.secure_url};
+          console.log(this.body);
+          this.userServices.uploadProfileImage(this.usuario._id, this.body).subscribe(res=>{
+            if (res){
+              console.log(res);
+              console.log('Se subio con exito la foto de perfil')
+            }
+          },
+          error=>{ console.log(error);});
+        }
+      }, 
+      error =>{
+        console.log(error);
+      }
+      )
+    }
   }
 
   invalidName(){
