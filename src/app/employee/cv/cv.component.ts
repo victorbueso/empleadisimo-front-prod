@@ -62,7 +62,8 @@ export class CvComponent{
         this.userService.uploadCVBD(this.idEmpleado , this.body ).subscribe( res => {
           if (res){
             console.log(res);
-            console.log('Se subio con exito el cv')
+            console.log('Se subio con exito el cv');
+            this.addCv();
           }
         },
          error => { console.log(error)});
@@ -77,7 +78,7 @@ export class CvComponent{
   updateCurriculum(){
     this.userService.obtainMyCurriculums(this.idEmpleado).subscribe((res) => {
       this.curriculums = res;
-      this.updateDirCv();
+      //this.updateDirCv();
     }, err => console.error(err))
   }
 
@@ -90,6 +91,7 @@ export class CvComponent{
   listCv(){
     this.cvUpload = false;
     this.showCv = !this.showCv;
+    this.updateCurriculum();
   }
 
   updateDirCv(){
@@ -98,26 +100,49 @@ export class CvComponent{
     }
   }
 
-  deleteCv(url:string){
-    let uploadUrl = url.split('.com/');
-    this.userService.deleteCurriculum(uploadUrl[1], this.idEmpleado).subscribe(res => {
-      this.updateCurriculum();
+  
+  deleteCv(_idURL:string){
+    this.body = { idUrl: _idURL }
+    this.userService.deleteCurriculum(this.body, this.idEmpleado).subscribe(res => {
+      //this.updateCurriculum();
+      console.log(res);
+      console.log('Se elimino correctamete.');
+      this.listCv();
     }, err => {
       console.error(err)
     })
   }
 
   updateCV(url:string){
-    let updateUrl = url.split('.com/');
-    this.uploading = !this.uploading
-    this.userService.updateCurriculums(this.file, updateUrl[1], this.idEmpleado).subscribe(res => {
-      this.uploading = !this.uploading;
-      this.updateCurriculum();
-      this.successFile = true;
-    },
-    err => {
-      console.error(err)
-    })
+    const file_data = this.file;
+    //Mandarlo a traves de peticiones Rest.
+    console.log(file_data);
+    const data = new FormData();
+    data.append('file', file_data);
+    data.append('upload_preset', 'empleadisimo_cv');
+    data.append('cloud_name', 'jdfiallos');
+
+
+    this.userService.uploadCV( data ).subscribe( response=>{
+      if ( response ){
+        this.body = { urlCv: response.secure_url};
+        console.log(this.body);
+
+        //Aqui llamo a servicio para actualizar
+        this.userService.updateCVBD(this.idEmpleado, url , this.body ).subscribe( res => {
+          if (res){
+            console.log(res);
+            console.log('Se subio con exito el cv');
+            this.listCv();
+          }
+        },
+         error => { console.log(error)});
+      }
+    }, 
+    error => {
+      console.log(error);
+    }
+    )
   }
 
 }

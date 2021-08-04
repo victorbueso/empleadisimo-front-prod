@@ -93,6 +93,11 @@ export class UsuariosService {
   }
 
 
+  updateCVBD( idUsuario:String, idUrl: String, body: any ): Observable<any> {
+    return this.httpClient.post(`http://localhost:3000/usuarios/${idUrl}/updateCV/${idUsuario}`, body);
+  }
+
+
   sendPhoto(cv: File, idUser: string){
     
     const fd = new FormData();
@@ -103,15 +108,19 @@ export class UsuariosService {
   }
 
   obtainMyCurriculums(idUser: string){
-    return this.httpClient.get(`${this.url}/CVinfo/${idUser}`);
+    return this.httpClient.get(`http://localhost:3000/usuarios/CVinfo/${idUser}`);
   }
 
-  deleteCurriculum(file: string, idUser: string){
-    var data = {
-      'fp': file
-    }
-    return this.httpClient.post(`${this.url}/deleteCV/${ idUser }`, data);
+
+
+
+
+  deleteCurriculum(body: any, idUser: string){
+    return this.httpClient.post(`http://localhost:3000/usuarios/deleteCV/${ idUser }`, body);
   }
+
+
+
 
   isCompanyLogged(){
     if(this.cookieService.get('tipo')=='1'){

@@ -172,7 +172,7 @@ export class NavbarComponent implements OnInit{
         siguiendo : res.siguiendo
       }
       if(res?.fotoPerfil != ''){
-        this.imgPerfil = `https://empleadisimo.herokuapp.com/${this.usuarioLoggeado.fotoPerfil}`
+        this.imgPerfil =this.usuarioLoggeado.fotoPerfil
       }
     }, error => {
       console.log(error);

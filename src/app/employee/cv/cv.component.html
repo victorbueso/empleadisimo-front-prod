@@ -28,9 +28,9 @@
             </div>
             <div class="modify-content">
                 <div class="buttons-modify">
-                    <button (click)="deleteCv(curriculum)"  class="delete-cv">Eliminar</button>
-                    <a [href]='curriculum' class="open-cv" target="_blank">Abrir</a>
-                    <form (submit)="updateCV(curriculum)">
+                    <button (click)="deleteCv(curriculum._id)" class="delete-cv">Eliminar</button>
+                    <a [href]='curriculum.urlCv' class="open-cv" target="_blank">Abrir</a>
+                    <form (submit)="updateCV(curriculum._id)">
                         <input (change)="onPhotoSelected($event)" type="file" class="d-none" #photoinput>
                         <div (click)="photoinput.click()" class="input-file-cv">
                             <i class="fas fa-file-pdf"></i><span>{{ titleCurriculumU }}</span> 
