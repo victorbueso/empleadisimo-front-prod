@@ -47,7 +47,7 @@ export class UsuariosService {
 
   //Se envia el path de la iamgen
   uploadProfileImage(idUser:string,body:any):Observable<any>{
-    return this.httpClient.put(`http://localhost:3000/usuarios/profilePic/${idUser}`,body);
+    return this.httpClient.put(`${ this.url }/profilePic/${idUser}`,body);
   }
 
   updateProfileImage(idUser:string,data:any):Observable<any>{
@@ -89,12 +89,12 @@ export class UsuariosService {
   }
 
   uploadCVBD( idUsuario: String, body: String ): Observable<any> {
-    return this.httpClient.post(`http://localhost:3000/usuarios/${idUsuario}/cv`, body);
+    return this.httpClient.post(`${ this.url }/${idUsuario}/cv`, body);
   }
 
 
   updateCVBD( idUsuario:String, idUrl: String, body: any ): Observable<any> {
-    return this.httpClient.post(`http://localhost:3000/usuarios/${idUrl}/updateCV/${idUsuario}`, body);
+    return this.httpClient.post(`${ this.url }/${idUrl}/updateCV/${idUsuario}`, body);
   }
 
 
@@ -108,7 +108,7 @@ export class UsuariosService {
   }
 
   obtainMyCurriculums(idUser: string){
-    return this.httpClient.get(`http://localhost:3000/usuarios/CVinfo/${idUser}`);
+    return this.httpClient.get(`${ this.url }/CVinfo/${idUser}`);
   }
 
 
@@ -116,7 +116,7 @@ export class UsuariosService {
 
 
   deleteCurriculum(body: any, idUser: string){
-    return this.httpClient.post(`http://localhost:3000/usuarios/deleteCV/${ idUser }`, body);
+    return this.httpClient.post(`${ this.url }/deleteCV/${ idUser }`, body);
   }
 
 
